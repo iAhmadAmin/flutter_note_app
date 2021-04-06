@@ -30,8 +30,8 @@ class NoteTile extends StatelessWidget {
                 note.title,
                 style:
                     noteTitleTextStyle.copyWith(fontSize: isBigTitle ? 26 : 22),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 4,
+                //  overflow: TextOverflow.ellipsis,
+                //maxLines: 4,
               ),
             ),
             const Spacer(),

@@ -1,12 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_note_app/core/models/note_model.dart';
 import 'package:flutter_note_app/ui/styles/colors.dart';
 import 'package:flutter_note_app/ui/styles/text_styles.dart';
 import 'package:flutter_note_app/ui/widgets/icon_button.dart';
 import 'package:get/get.dart';
 
-class AddNotePage extends StatelessWidget {
+class AddNotePage extends StatefulWidget {
+  final bool isUpdate;
+  final Note note;
+  AddNotePage({this.isUpdate = false, this.note});
+
+  @override
+  _AddNotePageState createState() => _AddNotePageState();
+}
+
+class _AddNotePageState extends State<AddNotePage> {
   TextEditingController titleTextController = TextEditingController();
   TextEditingController noteTextController = TextEditingController();
+
+  @override
+  void initState() {
+    if (widget.isUpdate) {
+      titleTextController.text = widget.note.title;
+      noteTextController.text = widget.note.note;
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +57,7 @@ class AddNotePage extends StatelessWidget {
           ),
           MyIconButton(
             onTap: () {},
-            txt: "Save",
+            txt: widget.isUpdate ? "Update" : "Save",
           ),
         ],
       ),

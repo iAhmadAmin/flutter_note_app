@@ -59,18 +59,16 @@ class HomePage extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: StaggeredGridView.countBuilder(
+          primary: false,
           crossAxisCount: 4,
           itemCount: notesList.length,
           // staggeredTiles:
           //     notesList.map((e) => StaggeredTile.extent(2, 100)).toList(),
           // children: notesList.map((e) => NoteTile(note: e)).toList(),
           itemBuilder: (context, index) {
-            return NoteTile(
-                // isBigTitle: (index + 1) % 3 == 0 ? true : false,
-                note: notesList[index]);
+            return NoteTile(note: notesList[index]);
           },
-          staggeredTileBuilder: (int index) => new StaggeredTile.count(
-              _getCount(index: index)[0], _getCount(index: index)[1]),
+          staggeredTileBuilder: (int index) => new StaggeredTile.count(2, 2),
 
           mainAxisSpacing: 4.0,
           crossAxisSpacing: 4.0,

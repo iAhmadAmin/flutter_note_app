@@ -41,7 +41,10 @@ class NoteDetailPage extends StatelessWidget {
           ),
           MyIconButton(
             onTap: () {
-              Get.to(AddNotePage());
+              Get.to(AddNotePage(
+                isUpdate: true,
+                note: note,
+              ));
             },
             icon: Icons.edit,
           ),
