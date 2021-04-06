@@ -1,16 +1,33 @@
 import 'package:flutter/cupertino.dart';
 
 class Note {
-  final int id;
-  final String title;
-  final String note;
-  final DateTime date;
+   int id;
+   String title;
+   String note;
+   DateTime date;
 
   Note(
       {this.id,
       @required this.title,
       @required this.note,
       @required this.date});
+
+  Note.fromJson(Map<String, dynamic> json){
+    id = json['id'];
+    title = json['title'];
+    note = json['note'];
+    date = json['date'];
+  }
+  
+  Map<String, dynamic> toJson(){
+    final Map<String, dynamic> note = Map<String, dynamic>();
+    note['id'] = this.id;
+    note['title'] = this.title;
+    note['note'] = this.note;
+    note['date'] = this.date;
+    return note;
+  }
+
 }
 
 List<Note> notesList = [
