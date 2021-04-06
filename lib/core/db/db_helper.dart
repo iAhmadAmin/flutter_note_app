@@ -15,7 +15,7 @@ class DBHelper {
       _db =
           await openDatabase(_path, version: _version, onCreate: (db, version) {
         return db.execute(
-          "CREATE TABLE $_tablename(id INTEGER KEY AUTOINCREMENT, title STRING, note TEXT, date STRING)",
+          "CREATE TABLE $_tablename(id INTEGER PRIMARY KEY AUTOINCREMENT, title STRING, note TEXT, date STRING)",
         );
       });
     } catch (e) {

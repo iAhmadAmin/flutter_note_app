@@ -6,13 +6,19 @@ import 'package:get/get.dart';
 class NoteController extends GetxController {
   final noteList = [].obs;
 
+  @override
+  void onReady() {
+    getNotes();
+    super.onReady();
+  }
+
   Future<void> addNote({@required Note note}) async {
     return await DBHelper.insert(note);
   }
 
   void getNotes() async {
     List<Map<String, dynamic>> notes = await DBHelper.query();
-    noteList.assignAll(notes.map((data) => new Note.fromJson(data)).toList());
+    noteList.assignAll(notes.map((data) => Note.fromJson(data)).toList());
   }
 
   void deleteNote({@required Note note}) async {

@@ -56,6 +56,7 @@ class NoteDetailPage extends StatelessWidget {
   _body() {
     return Expanded(
       child: Container(
+        width: double.infinity,
         margin: const EdgeInsets.only(top: 12),
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
@@ -68,7 +69,7 @@ class NoteDetailPage extends StatelessWidget {
             const SizedBox(
               height: 12,
             ),
-            Text(DateFormat.yMd().format(note.date), style: dateTextStyle),
+            Text(note.date, style: dateTextStyle),
             const SizedBox(
               height: 12,
             ),

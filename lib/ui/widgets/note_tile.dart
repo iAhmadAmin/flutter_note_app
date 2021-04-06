@@ -4,7 +4,6 @@ import 'package:flutter_note_app/ui/pages/note_detailed_page.dart';
 import 'package:flutter_note_app/ui/styles/colors.dart';
 import 'package:flutter_note_app/ui/styles/text_styles.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class NoteTile extends StatelessWidget {
   final Note note;
@@ -27,6 +26,7 @@ class NoteTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               child: Text(
@@ -41,7 +41,7 @@ class NoteTile extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(DateFormat.yMd().format(note.date),
+                Text(note.date,
                     style: dateTextStyle.copyWith(
                         color: Colors.black.withOpacity(0.7))),
               ],
