@@ -15,7 +15,10 @@ class NoteTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(NoteDetailPage(note: note));
+        Get.to(
+          NoteDetailPage(note: note),
+          transition: Transition.leftToRight,
+        );
       },
       child: Container(
         padding: const EdgeInsets.all(12),

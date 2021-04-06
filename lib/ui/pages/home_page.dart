@@ -12,12 +12,18 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xFF3B3B3B),
-        onPressed: () {
-          Get.to(AddNotePage());
-        },
-        child: Icon(Icons.add),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: FloatingActionButton(
+          backgroundColor: Color(0xFF3B3B3B),
+          onPressed: () {
+            Get.to(
+              AddNotePage(),
+              transition: Transition.downToUp,
+            );
+          },
+          child: Icon(Icons.add),
+        ),
       ),
       backgroundColor: bgColor,
       body: SafeArea(
@@ -70,8 +76,8 @@ class HomePage extends StatelessWidget {
           },
           staggeredTileBuilder: (int index) => new StaggeredTile.count(2, 2),
 
-          mainAxisSpacing: 4.0,
-          crossAxisSpacing: 4.0,
+          mainAxisSpacing: 8.0,
+          crossAxisSpacing: 8.0,
           padding: const EdgeInsets.all(4.0),
         ),
       ),
