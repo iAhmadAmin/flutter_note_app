@@ -7,8 +7,9 @@ import 'package:get/get.dart';
 
 class NoteTile extends StatelessWidget {
   final Note note;
-  final bool isBigTitle;
-  NoteTile({@required this.note, this.isBigTitle = false});
+  NoteTile({
+    @required this.note,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,8 @@ class NoteTile extends StatelessWidget {
         );
       },
       child: Container(
+        margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+        width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: tileColors[note.id],
@@ -31,13 +34,29 @@ class NoteTile extends StatelessWidget {
             Container(
               child: Text(
                 note.title,
-                style:
-                    noteTitleTextStyle.copyWith(fontSize: isBigTitle ? 26 : 22),
-                //  overflow: TextOverflow.ellipsis,
-                //maxLines: 4,
+                maxLines: 2,
+                style: noteTitleTextStyle.copyWith(
+                  fontSize: 22,
+                ),
+                overflow: TextOverflow.ellipsis,
               ),
             ),
-            const Spacer(),
+            const SizedBox(
+              height: 4,
+            ),
+            Container(
+              child: Text(
+                note.note,
+                maxLines: 4,
+                style: noteTitleTextStyle.copyWith(
+                  fontSize: 14,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            const SizedBox(
+              height: 4,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
