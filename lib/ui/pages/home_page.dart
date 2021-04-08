@@ -11,6 +11,25 @@ import 'package:get/get.dart';
 class HomePage extends StatelessWidget {
   final _notesController = Get.put(NoteController());
 
+  final _tileCounts = [
+    StaggeredTile.count(2, 2),
+    StaggeredTile.count(2, 2),
+    StaggeredTile.count(4, 2),
+    StaggeredTile.count(2, 3),
+    StaggeredTile.count(2, 2),
+    StaggeredTile.count(2, 3),
+    StaggeredTile.count(2, 2),
+  ];
+  final _tileTypes = [
+    TileType.Square,
+    TileType.Square,
+    TileType.HorRect,
+    TileType.VerRect,
+    TileType.Square,
+    TileType.VerRect,
+    TileType.Square,
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +70,7 @@ class HomePage extends StatelessWidget {
         children: [
           Text(
             "Notes",
-            style: titleTextStyle,
+            style: titleTextStyle.copyWith(fontSize: 32),
           ),
           MyIconButton(
             onTap: () {},
@@ -62,37 +81,37 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  List<StaggeredTile> _staggeredTiles = const <StaggeredTile>[
-    const StaggeredTile.count(2, 2),
-    const StaggeredTile.count(2, 2),
-    const StaggeredTile.count(4, 2),
-    const StaggeredTile.count(2, 3),
-    const StaggeredTile.count(2, 2),
-    const StaggeredTile.count(2, 2),
-    const StaggeredTile.count(2, 2),
-    // const StaggeredTile.count(3, 2),
-    // const StaggeredTile.count(2, 2),
-    // const StaggeredTile.count(4, 2),
-  ];
-
   _body() {
     return Expanded(
         child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Obx(() {
         print("######## " + _notesController.noteList.length.toString());
         if (_notesController.noteList.isNotEmpty) {
-          return StaggeredGridView.count(
-            crossAxisCount: 4,
-            staggeredTiles: _staggeredTiles,
-            mainAxisSpacing: 8,
-            crossAxisSpacing: 8,
-            children: _notesController.noteList
-                .map((n) => NoteTile(
-                      note: n,
-                    ))
-                .toList(),
-          );
+          return StaggeredGridView.countBuilder(
+              crossAxisCount: 4,
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 8,
+              itemCount: _notesController.noteList.length,
+              itemBuilder: (context, index) {
+                return NoteTile(
+                  tileType: _tileTypes[index % 7],
+                  note: _notesController.noteList[index],
+                );
+              },
+              staggeredTileBuilder: (int index) => _tileCounts[index % 7]);
+
+          // return StaggeredGridView.count(
+          //   crossAxisCount: 4,
+          //   staggeredTiles: _staggeredTiles,
+          //   mainAxisSpacing: 12,
+          //   crossAxisSpacing: 12,
+          //   children: _notesController.noteList
+          //       .map((n) => NoteTile(
+          //             note: n,
+          //           ))
+          //       .toList(),
+          // );
 
           // ListView.builder(
           //     itemCount: _notesController.noteList.length,

@@ -5,10 +5,18 @@ import 'package:flutter_note_app/ui/styles/colors.dart';
 import 'package:flutter_note_app/ui/styles/text_styles.dart';
 import 'package:get/get.dart';
 
+enum TileType {
+  Square,
+  VerRect,
+  HorRect,
+}
+
 class NoteTile extends StatelessWidget {
   final Note note;
+  final TileType tileType;
   NoteTile({
     @required this.note,
+    @required this.tileType,
   });
 
   @override
@@ -23,7 +31,7 @@ class NoteTile extends StatelessWidget {
       child: Container(
         // margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
         width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: tileColors[note.id % 7],
           borderRadius: BorderRadius.circular(8),
@@ -32,24 +40,14 @@ class NoteTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
+              padding: tileType == TileType.HorRect
+                  ? const EdgeInsets.only(right: 100)
+                  : null,
               child: Text(
                 note.title,
-                maxLines: 2,
+                maxLines: _getMaxLines(tileType),
                 style: noteTitleTextStyle.copyWith(
-                  fontSize: 22,
-                ),
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            const SizedBox(
-              height: 4,
-            ),
-            Container(
-              child: Text(
-                note.note,
-                maxLines: 4,
-                style: noteTitleTextStyle.copyWith(
-                  fontSize: 14,
+                  fontSize: _getTxtSize(tileType),
                 ),
                 overflow: TextOverflow.ellipsis,
               ),
@@ -67,5 +65,27 @@ class NoteTile extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _getTxtSize(TileType tileType) {
+    switch (tileType) {
+      case TileType.Square:
+        return 21.0;
+      case TileType.VerRect:
+        return 24.0;
+      case TileType.HorRect:
+        return 29.0;
+    }
+  }
+
+  _getMaxLines(TileType tileType) {
+    switch (tileType) {
+      case TileType.Square:
+        return 4;
+      case TileType.VerRect:
+        return 8;
+      case TileType.HorRect:
+        return 3;
+    }
   }
 }

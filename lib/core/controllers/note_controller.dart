@@ -13,7 +13,8 @@ class NoteController extends GetxController {
   }
 
   Future<void> addNote({@required Note note}) async {
-    return await DBHelper.insert(note);
+    await DBHelper.insert(note);
+    getNotes();
   }
 
   Future<void> getNotes() async {
