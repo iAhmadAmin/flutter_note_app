@@ -1,6 +1,10 @@
-# flutter_note_app
+# Flutter Simple & Lightweight Note App
 
-A new Flutter project.
+Flutter Simple & Lightweight Note App
+- UI/UX Credit: https://dribbble.com/shots/11875872-A-simple-and-lightweight-note-app
+- SQFlite Database
+- GetX State Management
+- Staggered GridView
 
 ## Getting Started
 
