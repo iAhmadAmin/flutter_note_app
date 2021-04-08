@@ -24,7 +24,6 @@ class DBHelper {
   }
 
   static Future<int> insert(Note note) async {
-    print("Insert function called");
     return await _db.insert(_tablename, note.toJson());
   }
 
@@ -39,10 +38,9 @@ class DBHelper {
 
   static Future<int> update(Note note) async {
     print("update function called");
-    return await _db.rawUpdate('''
-      UPDATE notes
-      SET title = ?, note = ?
-      WHERE id = ?    
-      ''', [note.title, note.note, note.id]);
+    return await _db.rawUpdate(
+      "UPDATE notes SET title = ?, note = ? WHERE id = ? ",
+      [note.title, note.note, note.id],
+    );
   }
 }

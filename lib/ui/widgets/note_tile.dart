@@ -16,16 +16,16 @@ class NoteTile extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Get.to(
-          NoteDetailPage(note: note),
+          () => NoteDetailPage(note: note),
           transition: Transition.leftToRight,
         );
       },
       child: Container(
-        margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+        // margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
         width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: tileColors[note.id],
+          color: tileColors[note.id % 7],
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
@@ -54,9 +54,7 @@ class NoteTile extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            const SizedBox(
-              height: 4,
-            ),
+            const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

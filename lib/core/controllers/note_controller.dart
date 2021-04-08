@@ -16,17 +16,17 @@ class NoteController extends GetxController {
     return await DBHelper.insert(note);
   }
 
-  void getNotes() async {
+  Future<void> getNotes() async {
     List<Map<String, dynamic>> notes = await DBHelper.query();
     noteList.assignAll(notes.map((data) => Note.fromJson(data)).toList());
   }
 
-  void deleteNote({@required Note note}) async {
+  Future<void> deleteNote({@required Note note}) async {
     await DBHelper.delete(note);
     getNotes();
   }
 
-  void updateNote({@required Note note}) async {
+  Future<void> updateNote({@required Note note}) async {
     await DBHelper.update(note);
     getNotes();
   }

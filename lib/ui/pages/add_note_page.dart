@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_note_app/core/controllers/note_controller.dart';
 import 'package:flutter_note_app/core/models/note_model.dart';
+import 'package:flutter_note_app/ui/pages/home_page.dart';
 import 'package:flutter_note_app/ui/styles/colors.dart';
 import 'package:flutter_note_app/ui/styles/text_styles.dart';
 import 'package:flutter_note_app/ui/widgets/icon_button.dart';
@@ -120,17 +121,46 @@ class _AddNotePageState extends State<AddNotePage> {
   }
 
   _validateInput() async {
-    if (_titleTextController.text.isNotEmpty &&
-        _noteTextController.text.isNotEmpty) {
-      await _noteController
-          .addNote(
-            note: Note(
-              note: _noteTextController.text,
-              title: _titleTextController.text,
-              date: DateFormat.yM().format(_currentDate).toString(),
-            ),
-          )
-          .then((value) => Get.back());
+    bool isNotEmpty = _titleTextController.text.isNotEmpty &&
+        _noteTextController.text.isNotEmpty;
+    if (isNotEmpty && !widget.isUpdate) {
+      _addNoteToDB();
+      Get.back();
+    } else if (widget.isUpdate &&
+            _titleTextController.text != widget.note.title ||
+        _noteTextController.text != widget.note.note) {
+      _updateNote();
+      Get.offAll(() => HomePage());
+    } else {
+      Get.snackbar(
+        widget.isUpdate ? "Not Updated" : "Required*",
+        widget.isUpdate
+            ? "Fields are not updated yet."
+            : "All fields are required.",
+        snackPosition: SnackPosition.BOTTOM,
+        colorText: Colors.white,
+      );
     }
+  }
+
+  _addNoteToDB() async {
+    await _noteController.addNote(
+      note: Note(
+        note: _noteTextController.text,
+        title: _titleTextController.text,
+        date: DateFormat.yMMMd().format(_currentDate).toString(),
+      ),
+    );
+  }
+
+  _updateNote() async {
+    await _noteController.updateNote(
+      note: Note(
+        id: widget.note.id,
+        note: _noteTextController.text,
+        title: _titleTextController.text,
+        date: DateFormat.yMMMd().format(_currentDate).toString(),
+      ),
+    );
   }
 }
