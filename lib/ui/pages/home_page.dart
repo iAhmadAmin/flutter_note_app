@@ -12,13 +12,13 @@ class HomePage extends StatelessWidget {
   final _notesController = Get.put(NoteController());
 
   final _tileCounts = [
-    StaggeredTile.count(2, 2),
-    StaggeredTile.count(2, 2),
-    StaggeredTile.count(4, 2),
-    StaggeredTile.count(2, 3),
-    StaggeredTile.count(2, 2),
-    StaggeredTile.count(2, 3),
-    StaggeredTile.count(2, 2),
+    [2, 2],
+    [2, 2],
+    [4, 2],
+    [2, 3],
+    [2, 2],
+    [2, 3],
+    [2, 2],
   ];
   final _tileTypes = [
     TileType.Square,
@@ -88,22 +88,33 @@ class HomePage extends StatelessWidget {
       child: Obx(() {
         print("######## " + _notesController.noteList.length.toString());
         if (_notesController.noteList.isNotEmpty) {
-          return StaggeredGridView.countBuilder(
+          return StaggeredGrid.count(
               crossAxisCount: 4,
               mainAxisSpacing: 8,
               crossAxisSpacing: 8,
-              itemCount: _notesController.noteList.length,
-              itemBuilder: (context, index) {
-                return NoteTile(
-                  tileType: _tileTypes[index % 7],
-                  note: _notesController.noteList[index],
-                );
-              },
-              staggeredTileBuilder: (int index) => _tileCounts[index % 7]);
+              children: [
+                for (int i = 0; i < _notesController.noteList.length; i++)
+                  StaggeredGridTile.count(
+                      crossAxisCellCount: _tileCounts[i % 7][0],
+                      mainAxisCellCount: _tileCounts[i % 7][1],
+                      child: NoteTile(
+                        note: _notesController.noteList[i],
+                        tileType: _tileTypes[i % 7],
+                      ))
+              ]);
+          // itemCount: _notesController.noteList.length,
+          // itemBuilder: (context, index)
+          // {
+          //   return NoteTile(
+          //     tileType: _tileTypes[index % 7],
+          //     note: _notesController.noteList[index],
+          //   );
+          // },
+          // StaggeredGridTileBuilder: (int index) => _tileCounts[index % 7]);
 
           // return StaggeredGridView.count(
           //   crossAxisCount: 4,
-          //   staggeredTiles: _staggeredTiles,
+          //   StaggeredGridTiles: _StaggeredGridTiles,
           //   mainAxisSpacing: 12,
           //   crossAxisSpacing: 12,
           //   children: _notesController.noteList
