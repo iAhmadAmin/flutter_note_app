@@ -1,9 +1,11 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/material.dart';
-import 'package:flutter_note_app/core/models/note_model.dart';
-import 'package:flutter_note_app/ui/pages/note_detailed_page.dart';
-import 'package:flutter_note_app/ui/styles/colors.dart';
-import 'package:flutter_note_app/ui/styles/text_styles.dart';
 import 'package:get/get.dart';
+import 'package:note_app/core/models/note_model.dart';
+import 'package:note_app/ui/pages/note_detailed_page.dart';
+import 'package:note_app/ui/styles/colors.dart';
+import 'package:note_app/ui/styles/text_styles.dart';
 
 enum TileType {
   Square,
@@ -14,9 +16,12 @@ enum TileType {
 class NoteTile extends StatelessWidget {
   final Note note;
   final TileType tileType;
-  NoteTile({
-    @required this.note,
-    @required this.tileType,
+  final int index;
+  const NoteTile({
+    super.key,
+    required this.note,
+    required this.tileType,
+    required this.index,
   });
 
   @override
@@ -33,7 +38,7 @@ class NoteTile extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: tileColors[note.id % 7],
+          color: tileColors[index % 7],
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_note_app/ui/styles/text_styles.dart';
+import 'package:note_app/ui/styles/text_styles.dart';
 
 class MyIconButton extends StatelessWidget {
-  final IconData icon;
-  final Function onTap;
+  final IconData? icon;
+  final VoidCallback onTap;
   final String txt;
 
-  MyIconButton({Key key, this.icon, this.onTap, this.txt = ""})
+  const MyIconButton({Key? key, this.icon, required this.onTap, this.txt = ""})
       : super(key: key);
 
   @override
@@ -18,7 +18,7 @@ class MyIconButton extends StatelessWidget {
           width: icon != null ? 44 : 80,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            color: Color(0xFF3B3B3B),
+            color: const Color(0xFF3B3B3B),
           ),
           child: Center(
               child: icon != null

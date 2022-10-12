@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_note_app/core/db/db_helper.dart';
-import 'package:flutter_note_app/core/models/note_model.dart';
+import 'dart:developer';
+
 import 'package:get/get.dart';
+import 'package:note_app/core/db/db_helper.dart';
+import 'package:note_app/core/models/note_model.dart';
 
 class NoteController extends GetxController {
   final noteList = [].obs;
@@ -12,8 +13,12 @@ class NoteController extends GetxController {
     super.onReady();
   }
 
-  Future<void> addNote({@required Note note}) async {
-    await DBHelper.insert(note);
+  Future<void> addNote({required Note note}) async {
+    try {
+      await DBHelper.insert(note);
+    } catch (e) {
+      log('Exception (notController): $e');
+    }
     getNotes();
   }
 
@@ -22,12 +27,12 @@ class NoteController extends GetxController {
     noteList.assignAll(notes.map((data) => Note.fromJson(data)).toList());
   }
 
-  Future<void> deleteNote({@required Note note}) async {
+  Future<void> deleteNote({required Note note}) async {
     await DBHelper.delete(note);
     getNotes();
   }
 
-  Future<void> updateNote({@required Note note}) async {
+  Future<void> updateNote({required Note note}) async {
     await DBHelper.update(note);
     getNotes();
   }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_note_app/core/controllers/note_controller.dart';
-import 'package:flutter_note_app/ui/pages/add_note_page.dart';
-import 'package:flutter_note_app/ui/styles/colors.dart';
-import 'package:flutter_note_app/ui/styles/text_styles.dart';
-import 'package:flutter_note_app/ui/widgets/icon_button.dart';
-import 'package:flutter_note_app/ui/widgets/note_tile.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:note_app/core/controllers/note_controller.dart';
+import 'package:note_app/ui/pages/add_note_page.dart';
+import 'package:note_app/ui/styles/colors.dart';
+import 'package:note_app/ui/styles/text_styles.dart';
+import 'package:note_app/ui/widgets/icon_button.dart';
+import 'package:note_app/ui/widgets/note_tile.dart';
 
 class HomePage extends StatelessWidget {
   final _notesController = Get.put(NoteController());
@@ -30,20 +30,24 @@ class HomePage extends StatelessWidget {
     TileType.Square,
   ];
 
+  HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(12.0),
         child: FloatingActionButton(
-          backgroundColor: Color(0xFF3B3B3B),
+          backgroundColor: const Color(0xFF3B3B3B),
           onPressed: () {
             Get.to(
-              AddNotePage(),
+              const AddNotePage(
+                note: null,
+              ),
               transition: Transition.downToUp,
             );
           },
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
         ),
       ),
       backgroundColor: bgColor,
@@ -86,7 +90,6 @@ class HomePage extends StatelessWidget {
         child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Obx(() {
-        print("######## " + _notesController.noteList.length.toString());
         if (_notesController.noteList.isNotEmpty) {
           return StaggeredGrid.count(
               crossAxisCount: 4,
@@ -98,6 +101,7 @@ class HomePage extends StatelessWidget {
                       crossAxisCellCount: _tileCounts[i % 7][0],
                       mainAxisCellCount: _tileCounts[i % 7][1],
                       child: NoteTile(
+                        index: i,
                         note: _notesController.noteList[i],
                         tileType: _tileTypes[i % 7],
                       ))

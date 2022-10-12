@@ -1,9 +1,12 @@
-name: flutter_note_app
-description: Flutter Note App
-publish_to: 'none' 
+name: note_app
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
+
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.18.2 <3.0.0'
+
 
 dependencies:
   flutter:
@@ -14,17 +17,41 @@ dependencies:
   sqflite: ^2.0.0+3
   flutter_staggered_grid_view: ^0.6.2
   intl: ^0.17.0
+  uuid: ^3.0.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^2.0.0
+  flutter_launcher_icons: ^0.10.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/app_logo.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+
+
 
 flutter:
   uses-material-design: true
-  # assets:
-  #   - images/a_dot_burr.jpeg
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/
   #   - images/a_dot_ham.jpeg
 
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
   # fonts:
   #   - family: Schyler
   #     fonts:

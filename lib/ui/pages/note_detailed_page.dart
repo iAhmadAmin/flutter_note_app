@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_note_app/core/controllers/note_controller.dart';
-import 'package:flutter_note_app/core/models/note_model.dart';
-import 'package:flutter_note_app/ui/pages/add_note_page.dart';
-import 'package:flutter_note_app/ui/styles/colors.dart';
-import 'package:flutter_note_app/ui/styles/text_styles.dart';
-import 'package:flutter_note_app/ui/widgets/icon_button.dart';
 import 'package:get/get.dart';
+import 'package:note_app/core/controllers/note_controller.dart';
+import 'package:note_app/core/models/note_model.dart';
+import 'package:note_app/ui/pages/add_note_page.dart';
+import 'package:note_app/ui/styles/colors.dart';
+import 'package:note_app/ui/styles/text_styles.dart';
+import 'package:note_app/ui/widgets/icon_button.dart';
 
 class NoteDetailPage extends StatelessWidget {
   final Note note;
   final _noteController = Get.find<NoteController>();
-  NoteDetailPage({@required this.note});
+  NoteDetailPage({super.key, required this.note});
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +19,14 @@ class NoteDetailPage extends StatelessWidget {
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(12.0),
         child: FloatingActionButton(
-          backgroundColor: Color(0xFF3B3B3B),
+          backgroundColor: const Color(0xFF3B3B3B),
           onPressed: () {
             Get.to(() => AddNotePage(
                   isUpdate: true,
                   note: note,
                 ));
           },
-          child: Icon(Icons.edit),
+          child: const Icon(Icons.edit),
         ),
       ),
       body: SafeArea(
@@ -90,7 +90,7 @@ class NoteDetailPage extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      note.note,
+                      note.text,
                       style: bodyTextStyle,
                     ),
                     const SizedBox(

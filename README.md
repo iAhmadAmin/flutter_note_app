@@ -1,19 +1,6 @@
-# Flutter Simple & Lightweight Note App
+# note_app
 
-Flutter Simple & Lightweight Note App
-- UI/UX Credit: https://dribbble.com/shots/11875872-A-simple-and-lightweight-note-app
-- SQFlite Database
-- GetX State Management
-- Staggered GridView
-
-![flutter_note_app](https://user-images.githubusercontent.com/48145486/114013183-b2ec5280-9880-11eb-82e4-6069f03c1687.png)
-
-## Screen Shots
-<p float="left">
-<img src="https://user-images.githubusercontent.com/48145486/114013113-9e0fbf00-9880-11eb-8cae-10a21b9f54cf.png" width="300">
-<img src="https://user-images.githubusercontent.com/48145486/114013118-a0721900-9880-11eb-941c-93a82928a723.png" width="300">
-<img src="https://user-images.githubusercontent.com/48145486/114013129-a23bdc80-9880-11eb-96a8-ead19dc294b4.png" width="300">
-</p>
+A new Flutter project.
 
 ## Getting Started
 
@@ -21,9 +8,9 @@ This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.

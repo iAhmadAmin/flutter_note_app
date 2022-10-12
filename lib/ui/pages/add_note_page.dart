@@ -1,33 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_note_app/core/controllers/note_controller.dart';
-import 'package:flutter_note_app/core/models/note_model.dart';
-import 'package:flutter_note_app/ui/pages/home_page.dart';
-import 'package:flutter_note_app/ui/styles/colors.dart';
-import 'package:flutter_note_app/ui/styles/text_styles.dart';
-import 'package:flutter_note_app/ui/widgets/icon_button.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:note_app/core/controllers/note_controller.dart';
+import 'package:note_app/core/models/note_model.dart';
+import 'package:note_app/ui/pages/home_page.dart';
+import 'package:note_app/ui/styles/colors.dart';
+import 'package:note_app/ui/styles/text_styles.dart';
+import 'package:note_app/ui/widgets/icon_button.dart';
 
 class AddNotePage extends StatefulWidget {
   final bool isUpdate;
-  final Note note;
-  AddNotePage({this.isUpdate = false, this.note});
+  final Note? note;
+  const AddNotePage({super.key, this.isUpdate = false, this.note});
 
   @override
-  _AddNotePageState createState() => _AddNotePageState();
+  AddNotePageState createState() => AddNotePageState();
 }
 
-class _AddNotePageState extends State<AddNotePage> {
-  TextEditingController _titleTextController = TextEditingController();
-  TextEditingController _noteTextController = TextEditingController();
+class AddNotePageState extends State<AddNotePage> {
+  final TextEditingController _titleTextController = TextEditingController();
+  final TextEditingController _noteTextController = TextEditingController();
   final NoteController _noteController = Get.find<NoteController>();
-  DateTime _currentDate = DateTime.now();
+  final DateTime _currentDate = DateTime.now();
 
   @override
   void initState() {
     if (widget.isUpdate) {
-      _titleTextController.text = widget.note.title;
-      _noteTextController.text = widget.note.note;
+      _titleTextController.text = widget.note!.title;
+      _noteTextController.text = widget.note!.text;
     }
     super.initState();
   }
@@ -87,10 +87,10 @@ class _AddNotePageState extends State<AddNotePage> {
             decoration: InputDecoration(
               hintText: "Title",
               hintStyle: titleTextStyle.copyWith(color: Colors.grey),
-              focusedBorder: UnderlineInputBorder(
+              focusedBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(color: bgColor),
               ),
-              enabledBorder: UnderlineInputBorder(
+              enabledBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(color: bgColor),
               ),
             ),
@@ -107,10 +107,10 @@ class _AddNotePageState extends State<AddNotePage> {
             decoration: InputDecoration(
               hintText: "Type something...",
               hintStyle: bodyTextStyle,
-              focusedBorder: UnderlineInputBorder(
+              focusedBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(color: bgColor),
               ),
-              enabledBorder: UnderlineInputBorder(
+              enabledBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(color: bgColor),
               ),
             ),
@@ -127,8 +127,8 @@ class _AddNotePageState extends State<AddNotePage> {
       _addNoteToDB();
       Get.back();
     } else if (widget.isUpdate &&
-            _titleTextController.text != widget.note.title ||
-        _noteTextController.text != widget.note.note) {
+            _titleTextController.text != widget.note!.title ||
+        _noteTextController.text != widget.note!.text) {
       _updateNote();
       Get.offAll(() => HomePage());
     } else {
@@ -146,7 +146,7 @@ class _AddNotePageState extends State<AddNotePage> {
   _addNoteToDB() async {
     await _noteController.addNote(
       note: Note(
-        note: _noteTextController.text,
+        text: _noteTextController.text,
         title: _titleTextController.text,
         date: DateFormat.yMMMd().format(_currentDate).toString(),
       ),
@@ -156,8 +156,8 @@ class _AddNotePageState extends State<AddNotePage> {
   _updateNote() async {
     await _noteController.updateNote(
       note: Note(
-        id: widget.note.id,
-        note: _noteTextController.text,
+        id: widget.note!.id,
+        text: _noteTextController.text,
         title: _titleTextController.text,
         date: DateFormat.yMMMd().format(_currentDate).toString(),
       ),
