@@ -95,6 +95,7 @@ class HomePage extends StatelessWidget {
               crossAxisCount: 4,
               mainAxisSpacing: 8,
               crossAxisSpacing: 8,
+              axisDirection: AxisDirection.down,
               children: [
                 for (int i = 0; i < _notesController.noteList.length; i++)
                   StaggeredGridTile.count(
